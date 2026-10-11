@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dispensa Corso Gianna</title>
+<style>
+  :root{
+    --carta:#f7f5f0; --bianco:#fff; --inchiostro:#1c2430; --tenue:#55606e;
+    --linea:#ddd7ca; --oro:#a87b1e; --m1:#1f4f4a; --m2:#6b3a12; --acc:var(--m1);
+    --fs:21px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--carta);color:var(--inchiostro);font-family:"Segoe UI",Calibri,Arial,sans-serif;font-size:var(--fs);line-height:1.6}
+  button{font:inherit;cursor:pointer}
+  a{color:inherit}
+
+  /* barra in alto */
+  .barra{position:sticky;top:0;z-index:5;background:var(--acc);color:#fff;display:flex;align-items:center;gap:10px;padding:10px 18px;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+  .barra .tit{flex:1;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .barra button{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:8px;padding:6px 14px;font-size:16px}
+  .barra button:hover{background:rgba(255,255,255,.3)}
+
+  /* struttura */
+  .pagina{display:grid;grid-template-columns:330px 1fr;max-width:1400px;margin:0 auto}
+  nav.indice{position:sticky;top:56px;align-self:start;height:calc(100vh - 56px);overflow:auto;padding:24px 14px 40px 20px;border-right:1px solid var(--linea);font-size:16px;line-height:1.35}
+  nav.indice h4{margin:18px 0 8px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#fff;padding:5px 10px;border-radius:5px}
+  nav.indice a{display:flex;gap:8px;padding:7px 10px;border-radius:6px;text-decoration:none;color:var(--inchiostro)}
+  nav.indice a:hover{background:#ece7da}
+  nav.indice a.att{background:var(--bianco);box-shadow:0 1px 4px rgba(0,0,0,.1);font-weight:600}
+  nav.indice a span{color:var(--oro);font-weight:700;min-width:1.6em}
+  nav.indice .home{font-weight:600;margin-bottom:4px}
+  main{padding:40px 50px 80px;min-width:0}
+  .foglio{max-width:860px;margin:0 auto}
+
+  /* copertina */
+  .copert{text-align:center;padding:10px 0 28px;border-bottom:2px solid var(--oro);margin-bottom:30px}
+  .copert .pre{letter-spacing:.18em;text-transform:uppercase;color:var(--oro);font-size:.72em;font-weight:600}
+  .copert h1{font-family:Georgia,"Times New Roman",serif;font-weight:normal;font-size:2.2em;line-height:1.15;margin:.25em 0 .2em;color:var(--m1)}
+  .copert p{margin:0;color:var(--tenue)}
+  .riquadro{background:var(--bianco);border:1px solid var(--linea);border-radius:12px;padding:18px 26px;margin:0 0 28px}
+  .riquadro h2{font-family:Georgia,serif;font-weight:normal;color:var(--m1);margin:0 0 10px;font-size:1.3em}
+  .modh{font-family:Georgia,serif;font-weight:normal;font-size:1.35em;margin:34px 0 12px;display:flex;flex-wrap:wrap;align-items:baseline;gap:12px}
+  .modh span{font-family:"Segoe UI",sans-serif;font-size:.5em;letter-spacing:.14em;text-transform:uppercase;color:#fff;padding:4px 12px;border-radius:4px}
+  .elenco{list-style:none;margin:0;padding:0}
+  .elenco li{margin:0 0 10px}
+  .elenco a{display:flex;gap:14px;background:var(--bianco);border:1px solid var(--linea);border-left:6px solid var(--c);border-radius:8px;padding:12px 18px;text-decoration:none}
+  .elenco a:hover{box-shadow:0 4px 14px rgba(0,0,0,.08)}
+  .elenco .n{font-family:Georgia,serif;font-size:1.4em;color:var(--c);min-width:1.4em;line-height:1.2}
+  .elenco b{display:block}
+  .elenco small{color:var(--tenue);font-size:.8em;line-height:1.4;display:block}
+
+  /* capitolo */
+  .eti{font-size:.7em;letter-spacing:.16em;text-transform:uppercase;color:var(--oro);font-weight:600}
+  .cap h1{font-family:Georgia,serif;font-weight:normal;color:var(--acc);font-size:1.9em;line-height:1.2;margin:.2em 0 .3em}
+  .cap .sint{font-size:1.05em;color:var(--tenue);font-style:italic;margin:0 0 22px;padding-bottom:18px;border-bottom:2px solid var(--oro)}
+  .cap h3{font-family:Georgia,serif;font-weight:normal;color:var(--acc);font-size:1.3em;margin:1.3em 0 .4em}
+  .cap p{margin:0 0 .8em}
+  .cap ul,.cap ol{margin:0 0 1em;padding-left:1.4em}
+  .cap li{margin:.25em 0}
+  .cap ul li::marker{color:var(--oro)}
+  .cap strong{color:var(--acc)}
+  .cap table{width:100%;border-collapse:collapse;background:var(--bianco);margin:.4em 0 1.2em;font-size:.88em;border:1px solid var(--linea)}
+  .cap th{background:var(--acc);color:#fff;text-align:left;padding:8px 12px;font-weight:600}
+  .cap th strong{color:#fff}
+  .cap td{padding:8px 12px;border-bottom:1px solid var(--linea);vertical-align:top}
+  .cap tr:nth-child(even) td{background:#faf8f3}
+  .tab{overflow-x:auto}
+  .ricorda{background:#fbf3df;border-left:6px solid var(--oro);border-radius:0 10px 10px 0;padding:12px 18px;margin:1em 0 1.2em}
+  .ricorda::before{content:"Da ricordare";display:block;font-size:.65em;letter-spacing:.14em;text-transform:uppercase;color:var(--oro);font-weight:700;margin-bottom:2px}
+  .navcap{display:flex;justify-content:space-between;gap:14px;margin-top:40px;padding-top:20px;border-top:1px solid var(--linea)}
+  .navcap a{flex:1;max-width:48%;background:var(--bianco);border:1px solid var(--linea);border-radius:10px;padding:12px 16px;text-decoration:none;font-size:.85em}
+  .navcap a:hover{border-color:var(--acc)}
+  .navcap a small{display:block;color:var(--tenue);font-size:.8em}
+  .navcap .dx{text-align:right;margin-left:auto}
+
+  /* stampa */
+  .solo-stampa{display:none}
+  @media print{
+    @page{size:A4;margin:16mm}
+    body{background:#fff;font-size:11.5pt}
+    .barra,nav.indice,.navcap{display:none!important}
+    .pagina{display:block}
+    main{padding:0}
+    .foglio{max-width:none}
+    .cap{break-after:page}
+    .cap table,.ricorda{break-inside:avoid}
+    .cap h3{break-after:avoid}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  }
+  @media (max-width:900px){
+    .pagina{grid-template-columns:1fr}
+    nav.indice{display:none}
+    nav.indice.aperto{display:block;position:fixed;top:56px;left:0;right:0;bottom:0;height:auto;background:var(--carta);z-index:4}
+    main{padding:24px 16px 60px}
+    :root{--fs:19px}
+    .barra .tit{display:none}
+  }
+  @media (min-width:901px){ #bIndice{display:none} }
+</style>
+</head>
+<body>
+
+<div class="barra">
+  <button id="bIndice" title="Mostra l'indice">☰ Indice</button>
+  <div class="tit" id="titBarra"></div>
+  <button id="bMeno" title="Testo più piccolo">A−</button>
+  <button id="bPiu" title="Testo più grande">A+</button>
+  <button id="bStampa" title="Stampa">🖨 Stampa</button>
+</div>
+
+<div class="pagina">
+  <nav class="indice" id="indice"></nav>
+  <main><div class="foglio" id="foglio"></div></main>
+</div>
+
+<script src="contenuti.js"></script>
+<script>
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const inl = s => esc(s).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+
+/* trasforma il testo semplice di contenuti.js in HTML */
+function testoHTML(t) {
+  const righe = t.trim().split("\n");
+  let out = "", para = [], lista = null, tab = [];
+  const chiudi = () => {
+    if (para.length) { out += "<p>" + inl(para.join(" ")) + "</p>"; para = []; }
+    if (lista) { out += `<${lista.tipo}>` + lista.voci.map(v => "<li>" + inl(v) + "</li>").join("") + `</${lista.tipo}>`; lista = null; }
+    if (tab.length) {
+      const celle = r => r.replace(/^\||\|$/g, "").split("|").map(c => c.trim());
+      out += '<div class="tab"><table><tr>' + celle(tab[0]).map(c => "<th>" + inl(c) + "</th>").join("") + "</tr>" +
+        tab.slice(1).map(r => "<tr>" + celle(r).map(c => "<td>" + inl(c) + "</td>").join("") + "</tr>").join("") + "</table></div>";
+      tab = [];
+    }
+  };
+  for (const r0 of righe) {
+    const r = r0.trim();
+    if (!r) { chiudi(); continue; }
+    if (r.startsWith("## ")) { chiudi(); out += "<h3>" + inl(r.slice(3)) + "</h3>"; }
+    else if (r.startsWith("> ")) { chiudi(); out += '<div class="ricorda">' + inl(r.slice(2)) + "</div>"; }
+    else if (r.startsWith("|")) { if (para.length || lista) { const t2 = tab; tab = []; chiudi(); tab = t2; } tab.push(r); }
+    else if (/^- /.test(r) || /^\d+\. /.test(r)) {
+      const tipo = r.startsWith("- ") ? "ul" : "ol";
+      if (para.length || tab.length || (lista && lista.tipo !== tipo)) chiudi();
+      if (!lista) lista = { tipo, voci: [] };
+      lista.voci.push(r.replace(/^(- |\d+\. )/, ""));
+    }
+    else { if (lista || tab.length) chiudi(); para.push(r); }
+  }
+  chiudi();
+  return out;
+}
+
+/* elenco piatto di tutti gli argomenti, per avanti/indietro */
+const TUTTI = [];
+CORSO.moduli.forEach(m => m.argomenti.forEach((a, i) => TUTTI.push({ m, a, i, id: `m${m.n}-${i + 1}` })));
+
+function indice(attivo) {
+  let h = `<a href="#" class="home${attivo ? "" : " att"}">🏠 Copertina e calendario</a>`;
+  for (const m of CORSO.moduli) {
+    h += `<h4 style="background:${m.colore}">Modulo ${m.n} · ${esc(m.titolo)}</h4>`;
+    m.argomenti.forEach((a, i) => {
+      const id = `m${m.n}-${i + 1}`;
+      h += `<a href="#${id}" class="${id === attivo ? "att" : ""}"><span>${i + 1}</span>${esc(a.titolo)}</a>`;
+    });
+  }
+  $("#indice").innerHTML = h;
+}
+
+function copertina() {
+  document.documentElement.style.setProperty("--acc", "var(--m1)");
+  $("#titBarra").textContent = "Dispensa del corso — " + CORSO.titolo;
+  let h = `<div class="copert"><div class="pre">Corso di formazione professionale · Dispensa</div>
+    <h1>${esc(CORSO.titolo)}</h1><p>Lezioni: ${esc(CORSO.docente)}</p></div>
+    <div class="riquadro"><h2>Calendario delle lezioni</h2><div class="tab"><table class="cal" style="width:100%;border-collapse:collapse">
+    ${CORSO.calendario.map((c, i) => `<tr><td style="padding:6px 10px;border-bottom:1px solid var(--linea)"><b>${i + 1}ª lezione</b></td>
+      <td style="padding:6px 10px;border-bottom:1px solid var(--linea)">${c[0]} ${c[1]}</td>
+      <td style="padding:6px 10px;border-bottom:1px solid var(--linea)">${c[2]}, ${c[3]}</td></tr>`).join("")}
+    </table></div></div>`;
+  for (const m of CORSO.moduli) {
+    h += `<div class="modh"><span style="background:${m.colore}">Modulo ${m.n}</span>${esc(m.titolo)}</div><ul class="elenco">`;
+    m.argomenti.forEach((a, i) => {
+      h += `<li><a href="#m${m.n}-${i + 1}" style="--c:${m.colore}"><div class="n">${i + 1}</div>
+        <div><b>${esc(a.titolo)}</b><small>${esc(a.sintesi)}</small></div></a></li>`;
+    });
+    h += `</ul>`;
+  }
+  $("#foglio").innerHTML = h;
+  indice(null);
+}
+
+function capitoloHTML(x) {
+  return `<article class="cap" style="--acc:${x.m.colore}">
+    <div class="eti">Modulo ${x.m.n} · ${esc(x.m.titolo)} — Argomento ${x.i + 1}</div>
+    <h1>${esc(x.a.titolo)}</h1><p class="sint">${esc(x.a.sintesi)}</p>${testoHTML(x.a.testo)}</article>`;
+}
+
+function capitolo(id) {
+  const k = TUTTI.findIndex(x => x.id === id);
+  if (k < 0) return copertina();
+  const x = TUTTI[k], prec = TUTTI[k - 1], succ = TUTTI[k + 1];
+  document.documentElement.style.setProperty("--acc", x.m.colore);
+  $("#titBarra").textContent = `Modulo ${x.m.n} · ${x.a.titolo}`;
+  $("#foglio").innerHTML = capitoloHTML(x) +
+    `<div class="navcap">` +
+    (prec ? `<a href="#${prec.id}"><small>◀ Precedente</small>${esc(prec.a.titolo)}</a>` : `<a href="#"><small>◀ Torna a</small>Copertina</a>`) +
+    (succ ? `<a class="dx" href="#${succ.id}"><small>Successivo ▶</small>${esc(succ.a.titolo)}</a>` : `<a class="dx" href="#"><small>Fine ▶</small>Copertina</a>`) +
+    `</div>`;
+  indice(id);
+}
+
+function vai() {
+  const id = location.hash.slice(1);
+  id ? capitolo(id) : copertina();
+  window.scrollTo(0, 0);
+  $("#indice").classList.remove("aperto");
+}
+addEventListener("hashchange", vai);
+
+/* grandezza del testo, ricordata nel browser */
+let fs = 21;
+try { fs = +localStorage.getItem("dispensa-gianna-fs") || 21; } catch (e) {}
+const applicaFs = () => { document.documentElement.style.setProperty("--fs", fs + "px"); try { localStorage.setItem("dispensa-gianna-fs", fs); } catch (e) {} };
+$("#bPiu").onclick = () => { fs = Math.min(40, fs + 2); applicaFs(); };
+$("#bMeno").onclick = () => { fs = Math.max(15, fs - 2); applicaFs(); };
+if (innerWidth > 900) applicaFs();
+
+$("#bIndice").onclick = () => $("#indice").classList.toggle("aperto");
+
+/* stampa: dalla copertina stampa tutta la dispensa, da un capitolo solo quel capitolo */
+$("#bStampa").onclick = () => {
+  if (location.hash) { window.print(); return; }
+  const prima = $("#foglio").innerHTML;
+  $("#foglio").innerHTML = `<div class="cap">${prima}</div>` + TUTTI.map(capitoloHTML).join("");
+  window.print();
+  $("#foglio").innerHTML = prima;
+};
+
+vai();
+</script>
+</body>
+</html>
